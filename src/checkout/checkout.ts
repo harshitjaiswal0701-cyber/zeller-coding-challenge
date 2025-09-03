@@ -56,7 +56,6 @@ class Checkout {
   }
   total(): number {
     let total = 0;
-    // Group items by SKU first
     const itemCounts: Record<SKU, number> = {
       ipd: 0,
       mbp: 0,
@@ -67,12 +66,9 @@ class Checkout {
       itemCounts[item] = (itemCounts[item] || 0) + 1;
     }
     
-    // Apply pricing rules for each SKU that was scanned
     for (const sku of Object.keys(itemCounts) as SKU[]) {
       const count = itemCounts[sku];
-      // Find the pricing rule for this specific SKU
       const rule = this.pricingRules.find(r => {
-        // Check if this rule is for this SKU by checking the rule's internal sku property
         return (r as any).sku === sku;
       });
       
@@ -87,7 +83,6 @@ class Checkout {
   }
 }
 
-// Pricing rules setup
 const pricingRules: PricingRule[] = [
   new ThreeForTwoRule("atv"),
   new BulkDiscountRule("ipd", 4, 499.99),
