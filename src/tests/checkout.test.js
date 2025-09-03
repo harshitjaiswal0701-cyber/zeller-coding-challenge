@@ -1,4 +1,4 @@
-const { Checkout, pricingRules } = require("./Checkout");
+const { Checkout, pricingRules } = require("../checkout/checkout");
 
 describe("Checkout System", () => {
   test("atv, atv, atv, vga - Apple TV special", () => {
